@@ -7,7 +7,8 @@ export function useCalculator() {
 
    const handleNumberClick = (number) => {
       if (display.length >= 9 ) return 
-      setDisplay((prev) => (prev === "0" ? number : prev + number ))
+      if (number === "." && display.includes (".")) return 
+      setDisplay((prev) => (prev === "0" && number !== "." ? number : prev + number ))
    }
 
    const handleOperationClick = (op) => {
@@ -15,12 +16,18 @@ export function useCalculator() {
          const  result = calculate(previousValue, parseFloat(display), operation)
          if (result >999999999 || result < 0 ) {
             setDisplay ("ERROR")
+            setPreviousValue(null)
+            setOperation(null)
          } else {
             setDisplay(result.toString())
             setPreviousValue(result)
          }
       } else{
-         setPreviousValue(parseFloat(display))
+         if (op === "-" && previousValue === null && display === "0"){
+            setDisplay("-")
+            return
+         }
+         setPreviousValue(parseFloat (display))
       }
       setOperation(op)
       setDisplay("0")
@@ -36,6 +43,8 @@ export function useCalculator() {
             return a * b
          case "/":
             return b !== 0 ? a / b: "ERROR"
+         case "%":
+            return b !== 0 ? a % b : "ERROR"
          default: 
             return b        
       }
@@ -54,5 +63,11 @@ export function useCalculator() {
       setPreviousValue(null)
    }
 
-   return { display, handleNumberClick, handleOperationClick, handleEqualClick }
+   const handleToggleSign = () => {
+      if (display === "0" || display === "ERROR") return 
+      const newValue = parseFloat(display) * -1 
+      setDisplay(newValue.toString()) 
+   }
+
+   return { display, handleNumberClick, handleOperationClick, handleEqualClick, handleToggleSign }
 }

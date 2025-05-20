@@ -2,9 +2,9 @@ import React from 'react'
 import Button from './Button'
 import './Keypad.css'
 
-export default function Keypad({ onNumberClick, onOperationClick, onEqualClick, onClearClick }) {
-   const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0']
-   const operations = ["+", "-", "*", "/"]
+export default function Keypad({ onNumberClick, onOperationClick, onEqualClick, onClearClick, onToggleSign }) {
+   const numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", "."]
+   const operations = ["+", "-", "*", "/", "%"]
 
    return (
       <div className="keypad">
@@ -20,6 +20,7 @@ export default function Keypad({ onNumberClick, onOperationClick, onEqualClick, 
          ))}
          <Button onClick={onEqualClick}>=</Button>
          <Button onClick={onClearClick}>C</Button>
+         <Button onClick={onToggleSign}>+/-</Button>
          </div>
    )
 }
