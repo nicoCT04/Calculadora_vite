@@ -1,0 +1,25 @@
+import React from 'react'
+import Button from './Button'
+import './Keypad.css'
+
+export default function Keypad({ onNumberClick, onOperationClick, onEqualClick, onClearClick }) {
+   const numbers = ['7', '8', '9', '4', '5', '6', '1', '2', '3', '0']
+   const operations = ["+", "-", "*", "/"]
+
+   return (
+      <div className="keypad">
+         {numbers.map((num) => (
+            <Button key={num} onClick={() => onNumberClick(num)}>
+               {num}
+            </Button>
+         ))}
+         {operations.map((op) => (
+            <Button key={op} onClick={() => onOperationClick(op)}>
+               {op}
+            </Button>
+         ))}
+         <Button onClick={onEqualClick}>=</Button>
+         <Button onClick={onClearClick}>C</Button>
+         </div>
+   )
+}
