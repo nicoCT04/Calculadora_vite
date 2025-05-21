@@ -13,22 +13,23 @@ export function useCalculator() {
 
    const handleOperationClick = (op) => {
       if (operation && previousValue !== null) {
-         const  result = calculate(previousValue, parseFloat(display), operation)
-         if (result >999999999 || result < 0 ) {
-            setDisplay ("ERROR")
+         const result = calculate(previousValue, parseFloat(display), operation)
+         if (result > 999999999 || result < 0) {
+            setDisplay("ERROR")
             setPreviousValue(null)
             setOperation(null)
          } else {
             setDisplay(result.toString())
-            setPreviousValue(result)
+            setPreviousValue(result) 
          }
-      } else{
-         if (op === "-" && previousValue === null && display === "0"){
-            setDisplay("-")
+      } else {
+         if (op === "-" && previousValue === null && display === "0") {
+            setDisplay("-") 
             return
          }
-         setPreviousValue(parseFloat (display))
+         setPreviousValue(parseFloat(display)) 
       }
+      
       setOperation(op)
       setDisplay("0")
    }
@@ -53,11 +54,13 @@ export function useCalculator() {
    const handleEqualClick = () => {
       if (operation && previousValue != null) {
          const result = calculate(previousValue, parseFloat(display), operation)
-         if (result > 999999999 || result < 0){
+         if (result > 999999999 || result < 0) {
             setDisplay("ERROR")
          } else {
             setDisplay(result.toString())
          }
+      } else if (!operation && display !== "ERROR") {
+         setDisplay(parseFloat(display).toString())
       }
       setOperation(null)
       setPreviousValue(null)
@@ -65,9 +68,15 @@ export function useCalculator() {
 
    const handleToggleSign = () => {
       if (display === "0" || display === "ERROR") return 
-      const newValue = parseFloat(display) * -1 
-      setDisplay(newValue.toString()) 
+      const newValue = (parseFloat(display) * -1 ).toString()
+      setDisplay(newValue) 
    }
 
-   return { display, handleNumberClick, handleOperationClick, handleEqualClick, handleToggleSign }
+   const handleClearClick = () => {
+      setDisplay('0')
+      setPreviousValue(null)
+      setOperation(null)
+   }
+
+   return { display, handleNumberClick, handleOperationClick, handleEqualClick, handleToggleSign, handleClearClick }
 }

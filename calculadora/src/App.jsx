@@ -4,11 +4,12 @@ import Keypad from './components/Keypad'
 import { useCalculator } from './hooks/Calculadoralog'
 
 export default function App() {
-  const { display, handleNumberClick, handleOperationClick, handleEqualClick, handleToggleSign } = useCalculator()
-
-  const handleClearClick = () => {
-    window.location.reload();
-  }
+  const { display, handleNumberClick, 
+    handleOperationClick, 
+    handleEqualClick, 
+    handleToggleSign, 
+    handleClearClick } 
+  = useCalculator()
 
   return (
     <div className="calculator-container">

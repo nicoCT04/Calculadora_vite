@@ -8,6 +8,9 @@ export default function Keypad({ onNumberClick, onOperationClick, onEqualClick, 
 
    return (
       <div className="keypad">
+         <Button onClick={onClearClick}>C</Button>
+         <Button onClick={onToggleSign}>+/-</Button>
+         <Button onClick={onEqualClick}>=</Button>
          {numbers.map((num) => (
             <Button key={num} onClick={() => onNumberClick(num)}>
                {num}
@@ -18,9 +21,6 @@ export default function Keypad({ onNumberClick, onOperationClick, onEqualClick, 
                {op}
             </Button>
          ))}
-         <Button onClick={onEqualClick}>=</Button>
-         <Button onClick={onClearClick}>C</Button>
-         <Button onClick={onToggleSign}>+/-</Button>
          </div>
    )
 }
