@@ -3,24 +3,33 @@ import Button from './Button'
 import './Keypad.css'
 
 export default function Keypad({ onNumberClick, onOperationClick, onEqualClick, onClearClick, onToggleSign }) {
-   const numbers = ["7", "8", "9", "4", "5", "6", "1", "2", "3", "0", "."]
-   const operations = ["+", "-", "*", "/", "%"]
+   const layout = [
+      ["C", "+/-", "="],
+      ["7", "8", "9", "/"],
+      ["4", "5", "6", "x"],
+      ["1", "2", "3", "-"],
+      [".", "0", "%", "+"]
+      
+   ]
+
+   const handleClick = (value) => {
+      if (value === "C") return onClearClick()
+      if (value === "+/-") return onToggleSign()
+      if (value === "=") return onEqualClick()
+      if (["+", "-", "x", "/", "%"].includes(value)) return onOperationClick(value)
+      return onNumberClick(value)
+   }
 
    return (
       <div className="keypad">
-         <Button onClick={onClearClick}>C</Button>
-         <Button onClick={onToggleSign}>+/-</Button>
-         <Button onClick={onEqualClick}>=</Button>
-         {numbers.map((num) => (
-            <Button key={num} onClick={() => onNumberClick(num)}>
-               {num}
-            </Button>
+         {layout.map((row, i) => (
+            <div key={i} className="keypad-row">
+               {row.map((btn) => (
+                  <Button key = {btn} onClick={() => handleClick(btn)}>{btn}
+                  </Button>
+               ))}
+            </div>
          ))}
-         {operations.map((op) => (
-            <Button key={op} onClick={() => onOperationClick(op)}>
-               {op}
-            </Button>
-         ))}
-         </div>
+      </div>
    )
 }

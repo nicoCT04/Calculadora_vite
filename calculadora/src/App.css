@@ -5,16 +5,24 @@
   align-items: center;
   justify-content: center;
   height: auto;
-  width: 320px; /* Tamaño fijo para la calculadora */
+  width: 320px; 
   padding: 20px;
   margin: auto;
-  background-color: #f9f9f9; /* Fondo claro */
-  border: 2px solid #ccc; /* Borde gris */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+  background-color: #f9f9f9; 
+  border: 2px solid #ccc; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 
 }
 
+body {
+  background-color: #ccc;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 

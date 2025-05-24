@@ -13,7 +13,7 @@ export default function App() {
 
   return (
     <div className="calculator-container">
-      <h1>Calculadora</h1>
+      <h1>Casio</h1>
       <Display value={display} />
       <Keypad 
         onNumberClick={handleNumberClick}

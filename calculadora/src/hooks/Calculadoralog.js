@@ -7,9 +7,15 @@ export function useCalculator() {
 
    const handleNumberClick = (number) => {
       if (display.length >= 9) return
-      if (number === "." && display.includes(".")) return
-
-      setDisplay((prev) => (prev === "0" && number !== "." ? number : prev + number))
+      if (operation){
+         const parts = display.split(operation)
+         const right = parts[1] || ""
+         if (number === "." && right.includes("."))return
+         setDisplay(prev => prev + number)
+      } else{
+         if(number === "." && display.includes(".")) return
+         setDisplay((prev) => (prev === "0" && number !== "." ? number : prev + number))
+      }
    }
 
    const handleOperationClick = (op) => {
@@ -47,7 +53,7 @@ export function useCalculator() {
             return a + b
          case "-":
             return a - b
-         case "*":
+         case "x":
             return a * b
          case "/":
             return b !== 0 ? a / b : "ERROR"
